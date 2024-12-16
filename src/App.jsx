@@ -1,9 +1,10 @@
 import "./App.css";
-import { useState } from "react"; // Correct import for useState
-import Header from "./Components/Header"; // Default import
-import ArticleSearch from "./Components/ArticleSearch"; // Default import
-import ArticleList from "./Components/ArticleList"; // Default import
-
+import { useState } from "react";
+import Header from "./Components/Header";
+import ArticleSearch from "./Components/ArticleSearch";
+import ArticleList from "./Components/ArticleList";
+import { Routes, Route, Router } from "react-router-dom";
+import ArticlePage from "./Components/ArticlePage";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -11,7 +12,10 @@ function App() {
     <>
       <Header />
       <ArticleSearch setSearchTerm={setSearchTerm} />
-      <ArticleList />
+      <Routes>
+        <Route path="/" element={<ArticleList />} />
+        <Route path="/article/:id" element={<ArticlePage />} />
+      </Routes>
     </>
   );
 }

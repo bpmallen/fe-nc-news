@@ -11,7 +11,7 @@ const ArticleList = () => {
         return response.json();
       })
       .then((articleData) => {
-        console.log(typeof articleData);
+        console.log(articleData);
         setArticles(articleData.articles);
       });
   }, []);
@@ -20,7 +20,6 @@ const ArticleList = () => {
       <h2>Here's a list of great articles you should read!</h2>
       <ul className="article-list">
         {articles.map((article, index) => {
-          console.log(article, "im an article");
           return <ArticleCard key={index} article={article} />;
         })}
       </ul>
