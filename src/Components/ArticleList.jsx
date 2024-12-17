@@ -1,28 +1,55 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard";
+import { getArticles } from "../api/api";
+import Error from "./Error";
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://my-nc-news-yyln.onrender.com/api/articles")
-      .then((response) => {
-        return response.json();
-      })
+    getArticles()
       .then((articleData) => {
-        console.log(articleData);
-        setArticles(articleData.articles);
+        setArticles(articleData);
+        setError(null);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .then(() => {
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return <div className="loading-container">Loading, please wait...</div>;
+  }
+
+  if (error) return <Error error={error} />;
+
   return (
     <>
-      <h2>Here's a list of great articles you should read!</h2>
-      <ul className="article-list">
-        {articles.map((article, index) => {
-          return <ArticleCard key={index} article={article} />;
-        })}
-      </ul>
+      <>
+        <div className="container">
+          <h2 className="sub-heading">
+            Here's a list of great articles you should read!
+          </h2>
+          {loading ? (
+            <p>Articles loading...</p>
+          ) : error ? (
+            <p>There has been an Error!!!</p>
+          ) : (
+            <ul className="article-list">
+              {articles.map((article) => {
+                return (
+                  <ArticleCard key={article.article_id} article={article} />
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      </>
     </>
   );
 };

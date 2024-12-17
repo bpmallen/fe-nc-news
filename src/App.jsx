@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import Header from "./Components/Header";
-import ArticleSearch from "./Components/ArticleSearch";
+
 import ArticleList from "./Components/ArticleList";
 import { Routes, Route, Router } from "react-router-dom";
 import ArticlePage from "./Components/ArticlePage";
@@ -11,11 +11,13 @@ function App() {
   return (
     <>
       <Header />
-      <ArticleSearch setSearchTerm={setSearchTerm} />
-      <Routes>
-        <Route path="/" element={<ArticleList />} />
-        <Route path="/article/:id" element={<ArticlePage />} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<ArticleList />} />
+          <Route path="/article/:id" element={<ArticlePage />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </div>
     </>
   );
 }
