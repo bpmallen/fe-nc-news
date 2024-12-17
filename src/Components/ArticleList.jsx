@@ -17,7 +17,7 @@ const ArticleList = () => {
       .catch((error) => {
         setError(error);
       })
-      .then(() => {
+      .finally(() => {
         setLoading(false);
       });
   }, []);
