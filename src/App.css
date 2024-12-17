@@ -4,6 +4,22 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Georgia", "Times New Roman", Times, serif;
+  line-height: 1.6;
+  background-color: #f7f7f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
 .header {
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
@@ -12,9 +28,12 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
 }
 
-.article-search {
+.sub-heading {
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
   padding: 20px 0;
@@ -26,20 +45,90 @@
 
 .article-list {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 1fr;
   gap: 20px;
   padding: 20px;
+  list-style: none;
 }
 
 .article-card {
+  font-weight: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #fff;
-  border: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 20px;
-  max-width: min-content;
+  margin: 15px 0;
 }
-.article-img {
+
+.article-content {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.article-title {
+  font-family: "Poppins", serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.article-author,
+.article-topic {
+  font-family: "Nunito", serif;
+  font-size: 0.9rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.article-image {
+  flex-shrink: 0;
+  margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.article-img {
+  width: 150px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.article-page {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  padding: 20px;
+}
+.article-page-title {
+  font-family: "Poppins", serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.article-page-img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.article-page-author,
+.article-page-topic {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+.article-page-body {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 20px;
+  max-width: 800px;
+  text-align: left;
 }
