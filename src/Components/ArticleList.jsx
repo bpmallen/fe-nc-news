@@ -5,7 +5,7 @@ import Error from "./Error";
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -18,11 +18,11 @@ const ArticleList = () => {
         setError(error);
       })
       .finally(() => {
-        setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return <div className="loading-container">Loading, please wait...</div>;
   }
 
@@ -35,19 +35,11 @@ const ArticleList = () => {
           <h2 className="sub-heading">
             Here's a list of great articles you should read!
           </h2>
-          {loading ? (
-            <p>Articles loading...</p>
-          ) : error ? (
-            <p>There has been an Error!!!</p>
-          ) : (
-            <ul className="article-list">
-              {articles.map((article) => {
-                return (
-                  <ArticleCard key={article.article_id} article={article} />
-                );
-              })}
-            </ul>
-          )}
+          <ul className="article-list">
+            {articles.map((article) => {
+              return <ArticleCard key={article.article_id} article={article} />;
+            })}
+          </ul>
         </div>
       </>
     </>

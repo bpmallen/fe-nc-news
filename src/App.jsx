@@ -1,13 +1,11 @@
 import "./App.css";
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./Components/Header";
-
 import ArticleList from "./Components/ArticleList";
-import { Routes, Route, Router } from "react-router-dom";
 import ArticlePage from "./Components/ArticlePage";
-function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+import Error from "./Components/Error";
 
+function App() {
   return (
     <>
       <Header />
