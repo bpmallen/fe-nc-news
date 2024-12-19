@@ -130,6 +130,7 @@ body {
   height: auto;
   object-fit: cover;
   margin-bottom: 20px;
+  border-radius: 15px;
 }
 .article-page-author {
   font-weight: bold;

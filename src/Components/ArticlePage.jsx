@@ -3,44 +3,40 @@ import { useParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "../api/api";
 import Error from "./Error";
 import { CommentsList } from "./CommentsList";
+import { VoteCounter } from "./VoteCounter";
 
 const ArticlePage = () => {
   const { id } = useParams();
   const [article, setArticle] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isError, setIsError] = useState(null);
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     setIsError(null);
 
-    getArticleById(id)
-      .then((data) => {
-        setArticle(data);
-        return getCommentsByArticleId(id);
-        setLoading(false);
-      })
-      .then((commentsData) => {
+    Promise.all([getArticleById(id), getCommentsByArticleId(id)])
+      .then(([articleData, commentsData]) => {
+        setArticle(articleData);
         setComments(commentsData);
-        setLoading(false);
       })
       .catch((error) => {
         setIsError(true);
         setError(error);
-        setLoading(false);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [id]);
-
-  // function to extrat the month/day/year and time from article.created_at
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString();
   };
 
-  if (loading) {
+  if (isLoading) {
     return <div className="loading-container">Loading, please wait...</div>;
   }
 
@@ -54,6 +50,7 @@ const ArticlePage = () => {
       <p className="article-page-comments">
         Comments 💬 {article.comment_count}
       </p>
+      <VoteCounter votes={article.votes} article_id={article.article_id} />
       <p className="article-page-posted">
         Posted: {formatDate(article.created_at)}
       </p>
