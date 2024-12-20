@@ -23,17 +23,25 @@ const getCommentsByArticleId = (article_id) => {
 };
 
 const updateVote = (article_id, voteChange) => {
-  return (
-    api
-      .patch(`articles/${article_id}`, { inc_votes: voteChange })
-      //{ inc_votes: voteChange } - this is the request body
-      // I didnt understand where inc_votes came from until looking at my back-end patchVotesByArticleId()
-      .then(() => {
-        console.log("patch complete");
-      })
-  );
+  return api
+    .patch(`articles/${article_id}`, { inc_votes: voteChange })
+    .then(() => {});
 };
 
-export { getArticles, getArticleById, getCommentsByArticleId, updateVote };
+const postComment = (article_id, commentData) => {
+  return api
+    .post(`/articles/${article_id}/comments`, commentData)
+    .then(({ data }) => {
+      return data.comment;
+    });
+};
+
+export {
+  getArticles,
+  getArticleById,
+  getCommentsByArticleId,
+  updateVote,
+  postComment,
+};
 
 // please forgive my leaving comments, it is for me when I revisit the PR in the future
