@@ -32,9 +32,6 @@ const ArticleList = () => {
     <>
       <>
         <div className="container">
-          <h2 className="sub-heading">
-            Here's a list of great articles you should read!
-          </h2>
           <ul className="article-list">
             {articles.map((article) => {
               return <ArticleCard key={article.article_id} article={article} />;

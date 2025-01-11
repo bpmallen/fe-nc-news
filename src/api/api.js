@@ -6,6 +6,7 @@ const api = axios.create({
 
 const getArticles = () => {
   return api.get("/articles").then(({ data }) => {
+    console.log(data.articles);
     return data.articles;
   });
 };
@@ -40,6 +41,12 @@ const deleteComment = (comment_id) => {
   return api.delete(`/comments/${comment_id}`).then(({ data }) => {});
 };
 
+const getArticlesByTopic = (topic) => {
+  return api.get(`articles?topic=${topic}`).then(({ data }) => {
+    return data.articles;
+  });
+};
+
 export {
   getArticles,
   getArticleById,
@@ -47,6 +54,7 @@ export {
   updateVote,
   postComment,
   deleteComment,
+  getArticlesByTopic,
 };
 
 // please forgive my leaving comments, it is for me when I revisit the PR in the future
