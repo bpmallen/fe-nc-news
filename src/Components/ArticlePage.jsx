@@ -4,7 +4,6 @@ import { getArticleById, getCommentsByArticleId } from "../api/api";
 import Error from "./Error";
 import { CommentsList } from "./CommentsList";
 import { VoteCounter } from "./VoteCounter";
-import { NewCommentForm } from "./NewCommentForm";
 
 const ArticlePage = () => {
   const { id } = useParams();
@@ -37,10 +36,6 @@ const ArticlePage = () => {
     return date.toLocaleString();
   };
 
-  const addNewComment = (newComment) => {
-    setComments((prevComments) => [newComment, ...prevComments]);
-  };
-
   if (isLoading) {
     return <div className="loading-container">Loading, please wait...</div>;
   }
@@ -66,10 +61,10 @@ const ArticlePage = () => {
         alt={article.title}
       />
       <div className="article-page-body">{article.body}</div>
-      <NewCommentForm article_id={id} addNewComment={addNewComment} />
+
       <div className="article-comments-list">
         <h3>Comments</h3>
-        <CommentsList comments={comments} />
+        <CommentsList initialComments={comments} article_id={id} />
       </div>
     </div>
   );

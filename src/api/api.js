@@ -36,12 +36,17 @@ const postComment = (article_id, commentData) => {
     });
 };
 
+const deleteComment = (comment_id) => {
+  return api.delete(`/comments/${comment_id}`).then(({ data }) => {});
+};
+
 export {
   getArticles,
   getArticleById,
   getCommentsByArticleId,
   updateVote,
   postComment,
+  deleteComment,
 };
 
 // please forgive my leaving comments, it is for me when I revisit the PR in the future
