@@ -32,15 +32,9 @@ body {
   font-weight: bold;
   color: #333;
 }
-
-.sub-heading {
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 20px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.header a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .article-list {
@@ -216,4 +210,26 @@ body {
 
 .comment-card {
   padding: 12px;
+}
+
+.topics-nav {
+  display: flex;
+  gap: 15px;
+  padding: 10px 0;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  justify-content: center;
+}
+
+.topic-link {
+  padding: 10px 15px;
+  background-color: #fff;
+  color: #777;
+  text-decoration: none;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.topic-link:hover {
+  color: #333;
 }
