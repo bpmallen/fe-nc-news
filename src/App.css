@@ -233,3 +233,25 @@ body {
 .topic-link:hover {
   color: #333;
 }
+
+.sort-controls fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sort-controls legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sort-controls label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #333;
+}
+
+.sort-controls input[type="radio"] {
+  margin-right: 5px;
+}

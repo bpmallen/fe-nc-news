@@ -19,7 +19,7 @@ const Topics = () => {
       })
       .catch((err) => {
         setError(err);
-        setIsLoadingfalse(false);
+        setIsLoading(false);
       });
   }, []);
 
