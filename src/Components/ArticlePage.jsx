@@ -8,22 +8,22 @@ import { VoteCounter } from "./VoteCounter";
 const ArticlePage = () => {
   const { id } = useParams();
   const [article, setArticle] = useState({});
+  const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isError, setIsError] = useState(null);
-  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-    setIsError(null);
+    setError(null);
 
     Promise.all([getArticleById(id), getCommentsByArticleId(id)])
       .then(([articleData, commentsData]) => {
         setArticle(articleData);
         setComments(commentsData);
+        setIsLoading(false);
       })
       .catch((error) => {
-        setIsError(true);
+        console.log(error.response.data.msg);
         setError(error);
       })
       .finally(() => {
@@ -40,7 +40,7 @@ const ArticlePage = () => {
     return <div className="loading-container">Loading, please wait...</div>;
   }
 
-  if (isError) return <Error error={error} />;
+  if (error) return <Error error={error} />;
 
   return (
     <div className="article-page">
