@@ -1,10 +1,14 @@
 const Error = ({ error }) => {
   let errorMessage;
 
-  error
-    ? (errorMessage = ` ${error.status} ${error.response.data.msg}`)
-    : (errorMessage =
-        "We couldn't find the page you were looking for. Please check you URL.");
+  if (error) {
+    errorMessage = `${error.status} ${
+      error.response?.data?.msg || error.message
+    }`;
+  } else {
+    errorMessage =
+      "We couldn't find the page you were looking for. Please check your URL.";
+  }
 
   return (
     <div className="error-display">

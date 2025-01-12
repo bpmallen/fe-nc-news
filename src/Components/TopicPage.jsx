@@ -12,6 +12,7 @@ const TopicPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    setError(null);
     getArticlesByTopic(topic)
       .then((articles) => {
         setArticles(articles);
