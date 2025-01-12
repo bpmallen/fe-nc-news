@@ -234,6 +234,10 @@ body {
   color: #333;
 }
 
+.topic-page h2 {
+  padding: 20px 0px 20px;
+}
+
 .sort-controls fieldset {
   border: none;
   padding: 0;

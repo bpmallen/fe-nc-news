@@ -47,11 +47,11 @@ export const NewCommentForm = ({ article_id, addNewComment }) => {
         <label>
           Comment:
           <textarea value={body} onChange={(e) => setBody(e.target.value)} />
-          {error && <p className="error-message">{error}</p>}
-          <button type="submit">
-            {isPosting ? "Posting your comment..." : "Post Comment"}
-          </button>
         </label>
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit">
+          {isPosting ? "Posting your comment..." : "Post Comment"}
+        </button>
       </form>
     </div>
   );
