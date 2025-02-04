@@ -4,10 +4,12 @@ const api = axios.create({
   baseURL: "https://my-nc-news-yyln.onrender.com/api",
 });
 
-const getArticles = ({ sort_by = "created_at" } = {}) => {
-  return api.get("/articles", { params: { sort_by } }).then(({ data }) => {
-    return data.articles;
-  });
+const getArticles = ({ sort_by = "created_at", limit = 10, p = 1 } = {}) => {
+  return api
+    .get("/articles", { params: { sort_by, limit, p } })
+    .then(({ data }) => {
+      return data.articles;
+    });
 };
 
 const getArticleById = (article_id) => {

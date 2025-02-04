@@ -11,9 +11,11 @@ const ArticleList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sort_by = searchParams.get("sort_by") || "created_at";
+  const p = parseInt(searchParams.get("p")) || 1;
+  const limit = parseInt(searchParams.get("limit")) || 10;
 
   useEffect(() => {
-    getArticles({ sort_by })
+    getArticles({ sort_by, p, limit })
       .then((articleData) => {
         setArticles(articleData);
         setError(null);
@@ -24,10 +26,18 @@ const ArticleList = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [sort_by]);
+  }, [searchParams]);
 
   const handleSortChange = (e) => {
-    setSearchParams({ sort_by: e.target.value });
+    setSearchParams({ sort_by: e.target.value, p: 1, limit });
+  };
+
+  const handleNextPage = () => {
+    setSearchParams({ sort_by, p: p + 1, limit });
+  };
+
+  const handlePrevPage = () => {
+    setSearchParams({ sort_by, p: Math.max(p - 1, 1), limit });
   };
 
   if (isLoading) {
@@ -79,6 +89,13 @@ const ArticleList = () => {
             return <ArticleCard key={article.article_id} article={article} />;
           })}
         </ul>
+        <div className="pagination-controls">
+          <button onClick={handlePrevPage} disabled={p === 1}>
+            Previous
+          </button>
+          <span>Page {p}</span>
+          <button onClick={handleNextPage}>Next</button>
+        </div>
       </div>
     </>
   );
