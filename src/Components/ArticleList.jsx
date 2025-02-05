@@ -11,11 +11,11 @@ const ArticleList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sort_by = searchParams.get("sort_by") || "created_at";
-  const p = parseInt(searchParams.get("p")) || 1;
+  const page = parseInt(searchParams.get("page")) || 1;
   const limit = parseInt(searchParams.get("limit")) || 10;
 
   useEffect(() => {
-    getArticles({ sort_by, p, limit })
+    getArticles({ sort_by, page, limit })
       .then((articleData) => {
         setArticles(articleData);
         setError(null);
@@ -29,15 +29,15 @@ const ArticleList = () => {
   }, [searchParams]);
 
   const handleSortChange = (e) => {
-    setSearchParams({ sort_by: e.target.value, p: 1, limit });
+    setSearchParams({ sort_by: e.target.value, page: 1, limit });
   };
 
   const handleNextPage = () => {
-    setSearchParams({ sort_by, p: p + 1, limit });
+    setSearchParams({ sort_by, page: page + 1, limit });
   };
 
   const handlePrevPage = () => {
-    setSearchParams({ sort_by, p: Math.max(p - 1, 1), limit });
+    setSearchParams({ sort_by, page: Math.max(page - 1, 1), limit });
   };
 
   if (isLoading) {
@@ -90,10 +90,10 @@ const ArticleList = () => {
           })}
         </ul>
         <div className="pagination-controls">
-          <button onClick={handlePrevPage} disabled={p === 1}>
+          <button onClick={handlePrevPage} disabled={page === 1}>
             Previous
           </button>
-          <span>Page {p}</span>
+          <span>Page {page}</span>
           <button onClick={handleNextPage}>Next</button>
         </div>
       </div>

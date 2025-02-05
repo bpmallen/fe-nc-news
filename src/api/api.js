@@ -4,9 +4,9 @@ const api = axios.create({
   baseURL: "https://my-nc-news-yyln.onrender.com/api",
 });
 
-const getArticles = ({ sort_by = "created_at", limit = 10, p = 1 } = {}) => {
+const getArticles = ({ sort_by = "created_at", limit = 10, page = 1 } = {}) => {
   return api
-    .get("/articles", { params: { sort_by, limit, p } })
+    .get("/articles", { params: { sort_by, limit, page } })
     .then(({ data }) => {
       return data.articles;
     });
